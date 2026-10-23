@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تداعيات انهيار الأجور في غزة</title>
+<style>
+:root{--ink:#241421;--muted:#6b5963;--line:#eadde2;--bg:#fff;--panel:#fff8fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+main{max-width:1200px;margin:auto;padding:28px 20px 24px}
+h1{font-size:clamp(24px,3.5vw,38px);line-height:1.5;text-align:center;margin:0 0 8px}
+.intro{text-align:center;color:var(--muted);margin:0 auto 28px;line-height:1.8}
+.flow{display:grid;grid-template-columns:repeat(7,minmax(130px,1fr));gap:8px;align-items:stretch}
+.stage{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:white;cursor:pointer;text-align:right;padding:0;color:inherit;transition:transform .18s,box-shadow .18s,border-color .18s;min-width:0}
+.stage:hover,.stage:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px #4b103018;outline:none}
+.stage[aria-pressed="true"]{border:2px solid var(--c);box-shadow:0 6px 20px #4b103022}
+.chevron{height:100px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.chevron:after{content:"";position:absolute;left:-1px;top:0;width:0;height:0;border-top:50px solid transparent;border-bottom:50px solid transparent;border-left:24px solid white}
+.num{position:absolute;top:9px;right:10px;font-size:12px;border:1px solid #ffffff88;border-radius:99px;padding:3px 7px}
+.symbol{font-size:34px;font-weight:bold}
+.name{font-weight:700;line-height:1.6;min-height:66px;padding:12px 10px 4px;font-size:15px}
+.summary{font-size:13px;line-height:1.8;color:#4d3944;padding:0 10px 14px}
+.detail{margin-top:22px;border-radius:14px;border-right:7px solid var(--c,#4b1030);background:var(--panel);padding:22px;min-height:165px}
+.detail-top{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.badge{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--c);color:white;font-weight:bold;flex:none}
+h2{font-size:22px;margin:0;line-height:1.5}
+.detail p{font-size:17px;line-height:1.9;margin:8px 0}
+.impact{margin-top:14px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:9px;font-weight:bold;line-height:1.8}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.controls button{border:1px solid #d8c5ce;border-radius:8px;background:white;color:var(--ink);padding:10px 16px;font:inherit;cursor:pointer}
+.controls button:disabled{opacity:.4;cursor:not-allowed}
+.count{color:var(--muted);font-size:14px}
+.note{font-size:12px;color:var(--muted);line-height:1.8;margin-top:16px}
+@media(max-width:950px){.flow{grid-template-columns:repeat(4,minmax(0,1fr))}.chevron:after{display:none}}
+@media(max-width:560px){main{padding:20px 12px}.flow{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chevron{height:82px}.chevron:after{display:none}.name{min-height:0;font-size:14px}.summary{font-size:12px}.detail p{font-size:15px}}
+</style>
+</head>
+<body>
+<main>
+  <h1>تداعيات انهيار الأجور وتآكل قيمتها في غزة خلال الحرب</h1>
+  <p class="intro">من الراتب إلى استنزاف المدخرات وصعوبة التعافي — اختاري مرحلة لعرض تفاصيلها.</p>
+  <section class="flow" id="flow" aria-label="مراحل انهيار الأجور"></section>
+  <section class="detail" id="detail" aria-live="polite">
+    <div class="detail-top"><span class="badge" id="badge">1</span><h2 id="title">خصومات تهوي بالأجور</h2></div>
+    <p id="description"></p><div class="impact" id="impact"></div>
+    <div class="controls">
+      <button id="prev" type="button">← السابقة</button>
+      <span class="count" id="count">1 من 7</span>
+      <button id="next" type="button">التالية →</button>
+    </div>
+  </section>
+  <p class="note">يعرض هذا التمثيل مسارًا تفسيريًا لتداعيات انهيار الأجور كما وردت في التقرير. انقري على أي مرحلة لاستكشاف أثرها.</p>
+</main>
+<script>
+const stages=[
+{title:"خصومات تهوي بالأجور",short:"خصومات الأجور",color:"#ff8588",symbol:"٪",summary:"تراجع ما يصل إلى الموظفين",description:"تتراجع الرواتب بفعل الخصومات وتقليص الأجور وتأخر صرفها، فتقل الأموال المتاحة للأسر لتغطية احتياجاتها.",impact:"الأثر: راتب أقل يصل إلى الموظف."},
+{title:"المتبقي يُستنزف بالغلاء",short:"الغلاء",color:"#ff5d59",symbol:"↘",summary:"الأسعار تلتهم الدخل",description:"ترتفع تكاليف الطعام والاحتياجات الأساسية، فتتراجع كمية السلع التي يستطيع الراتب شراءها.",impact:"الأثر: تآكل القوة الشرائية."},
+{title:"قيمة تتآكل بالعمولة",short:"عمولات الصرافة",color:"#f83b35",symbol:"٪",summary:"اقتطاع من الراتب",description:"تقتطع عمولات الصرافة جزءًا من الرواتب عند سحبها نقدًا، فتصل إلى أصحابها بقيمة أقل.",impact:"الأثر: أموال تُفقد قبل الإنفاق."},
+{title:"مدخرات تُصرف",short:"استنزاف المدخرات",color:"#ed1717",symbol:"↓",summary:"استهلاك الاحتياطي",description:"تلجأ الأسر إلى إنفاق مدخراتها لتغطية احتياجاتها الأساسية بعد تراجع الدخل.",impact:"الأثر: احتياطي الأسرة يتناقص."},
+{title:"أصول تُباع",short:"بيع الأصول",color:"#c91e27",symbol:"⌂",summary:"التخلي عن الممتلكات",description:"تبيع بعض الأسر أصولها وممتلكاتها لتأمين الغذاء والاحتياجات اليومية، ما يضعف قدرتها على استعادة مصادر دخلها لاحقًا.",impact:"الأثر: تراجع القدرة على استعادة الدخل."},
+{title:"ديون ترتفع",short:"تراكم الديون",color:"#99172c",symbol:"+",summary:"الاقتراض لتغطية الاحتياجات",description:"تتراكم الديون مع استمرار الفجوة بين الدخل المتاح وتكاليف المعيشة.",impact:"الأثر: التزامات مالية متزايدة."},
+{title:"صعوبة التعافي",short:"التعافي",color:"#4b1030",symbol:"↗",summary:"استعادة الاستقرار تصبح أصعب",description:"يؤدي استنزاف المدخرات وبيع الأصول وتراكم الديون إلى إضعاف قدرة الأسر على استعادة استقرارها الاقتصادي.",impact:"الأثر: تعافٍ اقتصادي أكثر صعوبة."}
+];
+let selected=0;
+const flow=document.getElementById("flow");
+stages.forEach((s,i)=>{
+ const b=document.createElement("button");b.type="button";b.className="stage";b.style.setProperty("--c",s.color);b.setAttribute("aria-pressed","false");
+ b.innerHTML=`<div class="chevron"><span class="num">${i+1}</span><span class="symbol">${s.symbol}</span></div><div class="name">${s.title}</div><div class="summary">${s.summary}</div>`;
+ b.addEventListener("click",()=>select(i));flow.appendChild(b);
+});
+function select(i){selected=i;const s=stages[i];document.getElementById("detail").style.setProperty("--c",s.color);document.getElementById("badge").textContent=i+1;document.getElementById("title").textContent=s.title;document.getElementById("description").textContent=s.description;document.getElementById("impact").textContent=s.impact;document.getElementById("count").textContent=`${i+1} من ${stages.length}`;document.getElementById("prev").disabled=i===0;document.getElementById("next").disabled=i===stages.length-1;[...flow.children].forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)));}
+document.getElementById("prev").addEventListener("click",()=>select(Math.max(0,selected-1)));
+document.getElementById("next").addEventListener("click",()=>select(Math.min(stages.length-1,selected+1)));
+select(0);
+</script>
+</body>
+</html>
